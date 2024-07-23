@@ -1,0 +1,479 @@
+﻿@model DTOLayer.Product.ProductViewModel
+
+@{
+    ViewData["Title"] = " Admin - Add Product";
+}
+@{
+    if(ViewBag.BrandList == null)
+    {
+        ViewBag.BrandList = "";
+
+    }
+    if(ViewBag.SimType == null){
+        ViewBag.SimType = "";
+    }
+    if(ViewBag.ProductType == null)
+    {
+        ViewBag.ProductType = "";
+    }
+    if(ViewBag.Processor == null)
+    {
+        ViewBag.Processor = "";
+    }
+    if(ViewBag.Core == null)
+    {
+        ViewBag.Core = "";
+    }
+    if( ViewBag.Ram == null)
+    {
+        ViewBag.Ram = "";
+    }
+    if(ViewBag.Storage == null)
+    {
+        ViewBag.Storage = "";
+    }
+    if(ViewBag.camFeatures == null){
+        ViewBag.camFeatures = "";
+    }
+}
+@*<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>*@
+@*<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js">
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="~/dist/fastselect.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+
+
+      <style type="text/css">
+          .select2-search input{
+              width:100% !important;
+          }
+          .select2{
+              width:100% !important;
+          }
+          .image_container {
+              height: 120px;
+              width: 200px;
+              border-radius: 6px;
+              overflow: hidden;
+              margin: 10px;
+          }
+		 .image_container img {
+		 	height: 100%;
+		 	width: auto;
+		 	object-fit: cover;
+		 }
+		 .image_container span {
+		 	top: -6px;
+		 	right: 8px;
+		 	color: red;
+		 	font-size: 28px;
+		 	font-weight: normal;
+		 	cursor: pointer;
+		 }
+         select{
+             
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit; 
+         }
+         .chosen-container {
+             display:none;
+         }
+         
+element.style {
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+    color: #333;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+        margin-right: 16px;
+            border: 0px solid #aaa;
+}
+.row{
+    margin-left: -5px;
+}
+	</style>
+<h2 style="text-align:center">Product Adding </h2>
+<div class="container-fluid mt-3 align-middle">
+    <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+            <div class="">
+                <div class="col-md-12">
+                    <form asp-action="Create" class="col" enctype="multipart/form-data" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input asp-for="id" runat="server" type="hidden" />
+
+
+
+                        <div class="center">
+                            <div class="form-group row mb-4">
+                                <div class="col-md-4 row">
+                                    <div asp-for="name" class="control-label" style="text-align-last:justify"> Name</div>
+                                    <input asp-for="name" placeholder="Name" class="form-control" />
+
+                                    <span asp-validation-for="name" class="text-danger"></span>
+                                </div>
+
+
+
+                                <div class="col-md-4 row">
+                                    <div asp-for="model" class="control-label" style="text-align-last:justify"> Model</div>
+                                    <input asp-for="model" placeholder="Model" class="form-control" />
+
+                                    <span asp-validation-for="model" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-4 row">
+                                    <div asp-for="price" class="control-label" style="text-align-last:justify"> Price</div>
+
+                                    <input asp-for="price" placeholder="Price" class="form-control" maxlength="6" />
+
+
+                                    <span asp-validation-for="price" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 row" style="padding-top: 2%">
+                                    <div asp-for="quantity" class="control-label" style="text-align-last:justify"> Quantity</div>
+                                    <input asp-for="quantity" placeholder="Quantity" class="form-control" />
+
+                                    <span asp-validation-for="quantity" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 row" style="padding-top: 2%">
+                                    <label asp-for="productType" class="control-label"> Product Type</label>
+
+                                    <select class="form-control master js-select2" asp-for="productType" asp-items="new SelectList(ViewBag.ProductType) "></select>
+                                    <span asp-validation-for="productType" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 row" style="padding-top: 2%">
+                                    <label asp-for="productBrand" class="control-label"> Product Brand</label>
+
+                                    <select asp-for="productBrand" class="form-control master js-select2" asp-items="new SelectList(ViewBag.BrandList)"></select>
+                                    <span asp-validation-for="productBrand" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 row" style="padding-top: 2%">
+                                    <label asp-for="specs.processor" class="control-label">Processor</label>
+
+                                    <select asp-for="specs.processor" class="form-control master js-select2" asp-items="new SelectList(ViewBag.Processor)"></select>
+                                    <span asp-validation-for="specs.processor" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 row" style="padding-top: 2%">
+                                    <label asp-for="specs.ram" class="control-label"> Ram</label>
+
+                                    <select asp-for="specs.ram" multiple class="form-control master js-select2" asp-items="new SelectList(ViewBag.Ram)" required ></select>
+
+                                    <span asp-validation-for="specs.ram" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 row" style="padding-top: 2%">
+                                    <label asp-for="specs.storage" class="control-label"> Storage</label>
+
+                                    <select asp-for="specs.storage" multiple class="form-control  js-select2" asp-items="new SelectList(ViewBag.Storage)" required></select>
+
+                                    <span asp-validation-for="specs.storage" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 row" style="padding-top: 2%">
+                                    <label asp-for="specs.core" class="control-label"> Core</label>
+
+                                    <select asp-for="specs.core" class="form-control master js-select2" asp-items="new SelectList(ViewBag.Core)"></select>
+                                    <span asp-validation-for="specs.core" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 row" style="padding-top: 2%">
+                                    <label asp-for="specs.camFeatures" class="control-label">Cam Features</label>
+
+                                    <select asp-for="specs.camFeatures" class="form-control master js-select2" asp-items="new SelectList(ViewBag.camFeatures)"></select>
+                                    <span asp-validation-for="specs.camFeatures" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 row" style="padding-top: 2%">
+                                    <label asp-for="specs.simType" class="control-label"> Sim Type</label>
+
+                                    <select asp-for="specs.simType" class="form-control master js-select2" asp-items="new SelectList(ViewBag.SimType) "></select>
+                                    <span asp-validation-for="specs.simType" class="text-danger"></span>
+                                </div>
+                                <label for="formFileMultiple" class="form-label">Uplaod Product Image</label>
+                                <input id="image" asp-for="imageFile" accept="image/*" class="form-control" type="file" onchange="imageselect()" style="height: 45px;margin-top: 3px;">
+                                <div class="col-md-8 col-10">
+                                </div>
+                                <div class="col-md-12" style="padding-top: 2%">
+                                    <div asp-for="description" class="control-label" style="text-align-last:justify;  margin-top:30px"> Description</div>
+                                    <textarea asp-for="description" class="form-control" id="Description"rows="3" placeholder="maximum limit upto 100-250 words"  maxlength="250"></textarea>
+                                   @* <input asp-for="description" placeholder="maximum limit upto 100-250 words" class="form-control"  rows="3" style="height:120%" maxlength="250" />*@
+                                    <span asp-validation-for="description" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-12 row">
+                            <div class="col-7"></div>
+                            @if (Model == null)
+                            {
+                                <input type="submit" value="Add" id="btn-submit" class=" float-right  btn btn-primary col-2 align-items-lg-start" style=" background-color: #e52d2e" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Update" id="btn-submit" class="m-1 float-right  btn btn-primary col-2 align-items-lg-start" style=" margin-top: 184px;  background-color: #e52d2e;" />
+                            }
+                            <a style="color: white; margin-left: 2%; padding-bottom: -10px; " asp-controller="Admin" asp-action="Index" class="col-md-2 float-right btn btn-primary col-2 align-items-lg-start"><b>Back</b></a>
+                        </div>
+                        
+
+                    </form>
+
+
+                    
+
+                </div>
+                
+                
+            </div>
+
+             <div class="col-12">
+                                   
+               
+
+
+            
+
+            </div>
+           
+
+
+      
+    </div>
+</div>
+</div>
+
+<div id="partialModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Image</h5>
+                    <button type="button" class="close" data-dismiss="model" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+<style>
+    .card {
+        font-size: 15px;
+        text-align-last: left !important;
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script>
+   
+    $(".master").chosen();
+    $(document).ready(function(){
+        CKEDITOR.replace("Description");
+    });
+   
+    function DeleteMaster(data) {
+        alert(data)
+    }
+    
+
+
+     
+
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                @*
+        <div class="form-group col-5">
+            <div class="row">
+                <label asp-for="name" class="control-label col-2"></label>
+                <div class="col-6">
+                    <input asp-for="name" class="form-control " />
+                    <span asp-validation-for="name" class="text-danger"></span>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="form-group col-3">
+            <div class="row">
+                <label asp-for="model" class="control-label col-4"></label>
+                <div class="col-8">
+                    <input asp-for="model" class="form-control" />
+                    <span asp-validation-for="model" class="text-danger"></span>
+                </div>
+            </div>
+            </div>
+        <div class="form-group col-5">
+            <div class="row">
+                <label asp-for="price" class="control-label col-4"></label>
+                <div class="col-6">
+                    <input asp-for="price" class="form-control" />
+                    <span asp-validation-for="price" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+        <div class="form-group col-8">
+            <div class="row">
+                <label asp-for="quantity" class="control-label col-4"></label>
+                <div class="col-6">
+                    <input asp-for="quantity" class="form-control" />
+                    <span asp-validation-for="quantity" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group col-3">
+                <div class="row">
+                    <label asp-for="productType" class="control-label col-3"></label>
+                    <div class="col-8">
+                        <select class="form-control master js-select2" asp-for="productType" asp-items="new SelectList(ViewBag.ProductType) "></select>
+                        <span asp-validation-for="productType" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="form-group col-5">
+                <div class="row">
+                    <label asp-for="productBrand" class="control-label col-3"></label>
+                    <div class="col-6">
+                        <select asp-for="productBrand" class="form-control master js-select2" asp-items="new SelectList(ViewBag.BrandList)"></select>
+                        <span asp-validation-for="productBrand" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label asp-for="specs.processor" class="control-label"></label>
+                <select asp-for="specs.processor" class="form-control master js-select2" asp-items="new SelectList(ViewBag.Processor)"></select>
+                <span asp-validation-for="specs.processor" class="text-danger"></span>
+            </div>
+            <div class="form-group col-2">
+                <label asp-for="specs.ram" class="control-label"></label>
+                <select asp-for="specs.ram" multiple class="form-control master js-select2" asp-items="new SelectList(ViewBag.Ram)"></select>
+                @{
+                    try
+                    {
+                        if (Model == null)
+                        {
+                        }
+                        else
+                        {
+                            if (Model.specs == null)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Model.specs.rams == null)
+                                {
+
+                                }
+                                else
+                                {
+                                    foreach (var item in Model.specs.rams)
+                                    {
+                                        <option value="@item.ram">@item.ram <span onclick="DeleteMaster(@item.id)">&times;</span></option>
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+                <span asp-validation-for="specs.ram" class="text-danger"></span>
+            </div>
+            <div class="form-group col-4">
+                <label asp-for="specs.storage" class="control-label"></label>
+                <select asp-for="specs.storage" multiple class="form-control  js-select2" asp-items="new SelectList(ViewBag.Storage)"></select>
+                @{
+                    try
+                    {
+                        if (Model == null)
+                        {
+                        }
+                        else
+                        {
+                            if (Model.specs == null)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Model.specs.storages == null)
+                                {
+
+                                }
+                                else
+                                {
+                                    foreach (var item in Model.specs.storages)
+                                    {
+                                        <option value="@item.storage">@item.storage  <span onclick="DeleteMaster()">&times; @item.id</span></option>
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+
+                <span asp-validation-for="specs.storage" class="text-danger"></span>
+            </div>
+            <div class="form-group col-2">
+                <label asp-for="specs.core" class="control-label"></label>
+                <select asp-for="specs.core" class="form-control master js-select2" asp-items="new SelectList(ViewBag.Core)"></select>
+                <span asp-validation-for="specs.core" class="text-danger"></span>
+            </div>
+            <div class="form-group col-4">
+                <label asp-for="specs.camFeatures" class="control-label"></label>
+                <select asp-for="specs.camFeatures" class="form-control master js-select2" asp-items="new SelectList(ViewBag.camFeatures)"></select>
+                <span asp-validation-for="specs.camFeatures" class="text-danger"></span>
+            </div>
+            <div class="form-group col-2">
+                <label asp-for="specs.simType" class="control-label"></label>
+                <select asp-for="specs.simType" class="form-control master js-select2" asp-items="new SelectList(ViewBag.SimType) "></select>
+                <span asp-validation-for="specs.simType" class="text-danger"></span>
+            </div>
+            <div class="form-group col-12">
+                <label asp-for="description" class="control-label"></label>
+                <textarea asp-for="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>*@
+
+               

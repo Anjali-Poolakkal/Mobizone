@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ 
+    ViewData["Title"] = "Mobizone(Admin) -About";
+}
+@model DomainLayer.About
+
+
+<div class="row container-fluid pr-6">
+    <div class="container-fluid mt-3 align-middle">
+    <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+            <div class="">
+<section class=" flex-fill">
+    <div class=" text-center">
+
+        <h2>About</h2>
+    </div>
+    <div class="text-center">
+        <p> @Model.content</p>
+
+    </div>
+   
+    <div class=" text-center">
+        <div class="form-group">
+            <a asp-action="AboutEdit" class="btn btn-orange">Edit</a>
+            <a class="btn btn-indigo" asp-controller="Admin" asp-action="Index" style="text-decoration:none;"><b style="color: white;">Back</b></a>
+        </div>
+        
+    </div>
+
+
+    <style>
+        .About {
+            margin-left: 300px;
+        }
+        .btn-indigo {
+            background: #e52d2e;
+            color:white;
+        }
+        .btn-orange {
+            background: #3187e3;
+            color: white;
+        }
+    </style>
+
+</section>
+</div>
+</div>
+</div></div></div>
+

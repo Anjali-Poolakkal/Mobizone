@@ -1,0 +1,215 @@
+﻿
+@model IEnumerable<DTOLayer.Product.ProductListViewModel>
+
+@{
+    //Layout = "~/Views/Admin/_Layout.cshtml";
+    ViewData["Title"] = "Mobizone(Admin) ProductList";
+}
+@{
+    var values = Enum.GetValues(typeof(DomainLayer.OrderStatus));
+}
+<link rel="stylesheet" href=
+"https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+
+
+<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js" defer></script>
+
+
+
+
+
+<h2 style="text-align: center;" >Product Listing </h2 >
+
+
+
+<div class="container-fluid mt-3 align-middle">
+    <div class="card shadow-lg p-3 mb-5 bg-white rounded"style="font-size:15px;">
+        <div class="card-body">
+            <div class="">
+<table id="datatable" class="table table-bordered table-hover table-sm" style="width:100%">
+        <thead>
+            <tr>
+                <th style="width:200px;">Brand</th>
+                <th style="width:200px;">Model</th>
+                <th style="width:95px;">Quantity</th>
+                <th style="width:105px;">Price</th>
+                <th style="width:125px;">Actions</th>
+            </tr>
+        </thead>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        debugger
+        var getProductLink;
+        var header;
+        //configLink(GetProductData);
+        configLink(header);
+        //header(GetProductData);
+        //GetProductData();
+        function configLink(callback) {
+            $.ajax({
+                url: '/config/getapi',
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    //console.log(data)
+                    getProductLink = data + 'api/productop/getlist';
+                    //header();
+                    callback(GetProductData);
+                }
+            })
+        }
+        function header(callback) {
+            $.ajax({
+                url: '/config/GetHeader',
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    //console.log(data)
+                    header = data;
+                    callback();
+                
+                }
+            })
+        }
+        function GetProductData() {
+            debugger
+            $.ajax({
+                url: getProductLink,
+                type: 'get',
+                datatype: 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + header);
+                },
+                success: function (data) {
+                    //console.log(data);
+                    $('[tool-tip-toggle="tooltip- demo"]').tooltip({
+
+                        placement: 'top'
+
+                    });
+                    $('#datatable').dataTable({
+                        data: data.result,
+                        columns: [
+                            { 'data': 'productBrand' },
+                            { 'data': 'model' },
+                            { 'data': 'quantity' },
+                            { 'data': 'price' },
+                            {
+                                "render": function (data, type, full, meta) {
+                                    if (full.status == 0) {
+                                        return '<div class="row"><div class="col"><a  href="/admin/Edit/' + full.id + '"><span class="fa-solid fa-pen-to-square glyphicon" data-toggle="tooltip" title="Edit"aria-hidden="true"></span></a></div><div class="col"> <a class="" onclick="someFunction(' + full.id + ');"> <span class="fa-solid fa-trash"  data-toggle="tooltip" title="Delete"aria-hidden="true"></span></a></div><div><a href="/admin/disable/' + full.id + '"><span class="fa-solid fa-circle-xmark" data-toggle="tooltip"  title="Disable" style="color:red"></span></a></div><div class="col"><a href ="/admin/ProductDetails?id=' + full.id + '"><span class="fa-solid fa-eye glyphicon" data-toggle="tooltip" title="View" aria-hidden="true"></span></a></div></div>';
+                                    }
+                                    else {
+                                        return '<div class="row"><div class="col"><a  href="/admin/Edit/' + full.id + '"><span class="fa-solid fa-pen-to-square glyphicon"  data-toggle="tooltip" title="Edit" aria-hidden="true"></span></a></div><div class="col"> <a class="" onclick="someFunction(' + full.id + ');"> <span class="fa-solid fa-trash" data-toggle="tooltip"  title="Delete"  aria-hidden="true"></span></a></div><div><a href="/admin/enable/' + full.id + '"><span class="fa-solid fa-circle-check"  data-toggle="tooltip" title="Enable"style="color:green"></span></a></div>  <div class="col"><a href ="/admin/ProductDetails?id=' + full.id + '"><span class="fa-solid fa-eye glyphicon" data-toggle="tooltip" title="View" aria-hidden="true"></span></a></div></div>';
+                                    }
+                                }
+                            }
+
+                        ]
+                    })
+                }
+            })
+        }
+
+        })
+     
+</script>
+<style>
+    .glyphicon {
+        font-size: x-large;
+        color: black;
+        font-variant: all-petite-caps;
+    }
+    
+    .modal-footer{
+            border-top: 0px solid #e5e5e5 !important
+    }
+    .modal-footer {
+    padding: 30px !important}
+    .navbar-brand {
+        display: inline-block;
+        padding-top: 0.3125rem;
+        padding-bottom: 0.3125rem;
+        margin-right: 1rem;
+        font-size: 1.25rem;
+        line-height: inherit;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div id="partialModal" class="modal " tabindex="-1"  role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Please Confirm Your Action</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+<div class="modal " id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+    <!--Content-->
+    <div class="modal-content text-center">
+      <!--Header-->
+      <div class="modal-header d-flex justify-content-center" style="background-color: brown;">
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+
+        <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer flex-center">
+        
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+
+
+    <script>
+        function someFunction(data) {
+    var id = data;
+    $(document).ready(function (e) {
+        $.ajax({
+                url: '/Delete/' + id,
+                type: 'get',
+                success: function (response) {
+                    $("#modalConfirmDelete").find(".modal-body").html(response);
+                    $("#modalConfirmDelete").modal('show');
+                },
+                failure: function (response) {
+                        alert("fail");
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+            })
+        
+    });
+}
+    </script>

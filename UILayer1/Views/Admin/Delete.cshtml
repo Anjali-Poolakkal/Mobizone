@@ -1,0 +1,16 @@
+﻿@model DomainLayer.ProductModel.ProductEntity
+
+<h3>Are you sure want to delete this?</h3>
+    <div class="row">
+         <div class="modal-footer col">
+    <form action="Delete" method="post">
+        <input name="id" value="@Model.id" type="hidden"/>
+       
+        <input  type="submit" value="Yes" class="btn  btn-danger" style=" margin-right:20px; padding-right: 21px;padding-left: 21px;"/>
+         
+    </form>
+    </div>
+    <div class="modal-footer col">
+                    <button type="button" class="btn  btn-success waves-effect" data-dismiss="modal" style="padding-right: 21px; padding-left: 21px; background-color:#6094dd">No</button>
+    </div>
+</div>

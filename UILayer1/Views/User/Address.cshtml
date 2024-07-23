@@ -1,0 +1,109 @@
+﻿@model DomainLayer.Users.Address
+
+@{
+    Layout = "~/Views/Simpleview/_accountLayout.cshtml";
+    ViewData["Title"] = "Mobizone- Edit Address";
+    //Layout = "~/Views/Simpleview/_BasicLayoutcshtml.cshtml";
+}
+@{
+    ViewData["Title"] = "Mobizone- Add New Address";
+    var returnUrl = ViewBag.ReturnUrl as string;
+}
+
+
+
+<div class="row align-item-center">
+    <div class="col-md-8 mb-4">
+        <div class="card-body">
+            <form action="/user/Address?ReturnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input asp-for="id" class="form-control" type="hidden" />
+                 <div class="row">
+                    <div class="col-md-8">
+                        <label asp-for="name" class="control-label">Name</label>
+                        <input asp-for="name" class="form-control" />
+                        <span asp-validation-for="name" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="address" class="control-label" style="padding-top: 10%">Address</label>
+                        <input asp-for="address" class="form-control" />
+                        <span asp-validation-for="address" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="district" class="control-label" style="padding-top: 10%">District</label>
+                        <input asp-for="district" class="form-control" />
+                        <span asp-validation-for="district" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label asp-for="state" class="control-label" style="padding-top: 10%">State</label>
+                        <input asp-for="state" class="form-control" />
+                        <span asp-validation-for="state" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="country" class="control-label" style="padding-top: 10%">Country</label>
+                        <input asp-for="country" class="form-control" />
+                        <span asp-validation-for="country" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label asp-for="pincode" class="control-label" style="padding-top: 10%">Pincode</label>
+                        <input asp-for="pincode" class="form-control" type="number" />
+                        <span asp-validation-for="pincode" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="phoneNumber" class="control-label" style="padding-top: 10%">Phone Number</label>
+                        <input asp-for="phoneNumber" class="form-control" type="number" />
+                        <span asp-validation-for="phoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="additionalInfo" class="control-label" style="padding-top: 10%">Additional Info</label>
+                        <input asp-for="additionalInfo" class="form-control" />
+                        <span asp-validation-for="additionalInfo" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="text-center">
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-orange" style="margin-top: -41%;" />
+                        @if (returnUrl != null)
+                        {
+                            <a href="@returnUrl" value="Cancel" class="btn btn-primary" style="margin-left: 93%; margin-top: -41%;">Cancel</a>
+                        }
+            else
+            {
+                    <a asp-action="Account" value="Cancel" class="btn btn-primary" style="margin-left: 93%; margin-top: -41%;">Cancel</a>
+            }
+                        
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+    <style>
+        .card-body {
+            margin-left: 40%;
+        }
+
+        .text-center {
+            margin-left: 73%;
+        }
+        .btn-orange{
+            background-color:red;
+            color:white;
+        }
+    </style>
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

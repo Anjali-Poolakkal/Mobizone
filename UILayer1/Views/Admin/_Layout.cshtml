@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title </title>
+    <link runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+    <link runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/SideBar.css" />
+    <link rel="stylesheet" href="~/css/navigation-bar.css" />
+    <link rel="stylesheet" href="~/css/footer.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Oswald:wght@500&family=Roboto+Condensed:wght@700&family=Rubik&family=Sansita+Swashed:wght@600&family=Satisfy&display=swap" rel="stylesheet">
+    
+</head>
+<body  style="overflow:auto">
+    <partial name="Admin\_navbar" />
+    <partial name="Admin\_sideBarMenu" />
+    <div class="content " style="padding-bottom:10px">
+        <div class="container-fluid">
+            <main role="main" class="pb-3">
+                <div id="mypartialview"></div> 
+
+                    @RenderBody()
+                    
+            </main>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/ckeditor/ckeditor.js"></script>
+    
+    @await Component.InvokeAsync("Notyf")
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+<style>
+    .card{
+         font-variant: common-ligatures !important;
+    }
+    li{
+        display:inline;
+    }
+    a{
+        cursor:pointer;
+    }
+    body{
+        padding-top:0px !important;
+    }
+</style>
+

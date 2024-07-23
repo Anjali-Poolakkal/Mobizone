@@ -1,0 +1,67 @@
+﻿<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit&family=Oswald:wght@500&family=Roboto+Condensed:wght@700&family=Rubik&family=Sansita+Swashed:wght@600&family=Satisfy&display=swap" rel="stylesheet">
+
+<div class="paddingIssue">
+
+
+
+    <div class="sidebar" style="margin-top: 3px; ">
+
+
+
+        <a class="@(Context.Request.Path == "/Admin"  ? "active" : "")" asp-action="Index">Dashboard</a>
+        <div id="product">
+            <a class="@(Context.Request.Path == "/Admin/list" || Context.Request.Path == "/Admin/Create"  ? "active" : "")"style="text-decoration: none;">Products</a>
+            <div id="dropdown1" class="dropdown">
+                <a asp-action="List" style="margin-right:100px;text-decoration:none;"class="@(Context.Request.Path == "/Admin/list" ? "active " : "")">List</a>
+                <a asp-action="Create" style="margin-right: 100px; text-decoration: none;"class="@(Context.Request.Path == "/Admin/Create" ? "active " : "")">Add</a>
+            </div>
+        </div>
+
+        <a asp-action="userdata" class="@(Context.Request.Path == "/Admin/userdata" ? "active " : "")"style="text-decoration: none;">Users</a>
+
+        <a asp-action="orderlist" class="@(Context.Request.Path == "/Admin/orderlist" ? "active " : "")"style="text-decoration: none;">Orders</a>
+        <div id="settings">
+            <a class="@(Context.Request.Path == "/Admin/About" || Context.Request.Path == "/Admin/Privacy"  || Context.Request.Path == "/Admin/Contact"  ? "active" : "")"style="text-decoration: none;">Settings</a>
+            <div id="dropdown2" class="dropdown">
+                <a asp-action="Contact" id="dropdown2" class="@(Context.Request.Path == "/Admin/Contact" ? "active " : "")"style="text-decoration: none;">Contact Us</a>
+
+                <a asp-action="About" id="dropdown2" class="@(Context.Request.Path == "/Admin/About" ? "active " : "")"style="text-decoration: none;">About</a>
+                <a asp-action="Privacy" id="dropdown2" class="@(Context.Request.Path == "/Admin/Privacy" ? "active " : "")"style="text-decoration: none;">Privacy & Policy</a>
+                <a asp-action="MasterData" id="dropdown2" class="@(Context.Request.Path == "/Admin/MasterData" ? "active " : "")"style="text-decoration: none;">Master</a>
+
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+  $("#product").click(function(){
+    $("#dropdown1").toggle();
+  });
+ 
+});
+
+ $(document).ready(function(){
+  $("#settings").click(function(){
+    $("#dropdown2").toggle();
+  });
+});
+    </script>
+    <style>
+        .dropdown {
+            display: none;
+        background-color: #275e4900;
+          padding-left: 8px;
+        text-align: center;
+        font-size: medium;
+        }
+        a{
+            cursor:pointer;
+        }
+        .dashboard{
+            text-decoration:none;
+        }
+    </style>
+ </div>

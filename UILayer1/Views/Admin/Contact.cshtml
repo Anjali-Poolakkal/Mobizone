@@ -1,0 +1,107 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Admin- Contact Us";
+}
+@model DomainLayer.AdminContact
+<div class="container-fluid mt-3 align-middle">
+    <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+            <section class=" flex-fill" style="margin-left: 0px;">
+                  <div class=" text-center">
+
+                        <h1>Contact Us</h1>
+                        <div class=" contact us" >
+                            <div class="text-center">
+                                <div class=" " container>
+                                    <div class="row mt-3">
+                                        <div class="col-8" style="margin-left:35%;">
+                                            <div class="row">
+                                                <p class="card-text col-3 row "><b>Address</b></p>
+                                                <p class="col-6 row">@Model.shopName</p>
+                                            </div>
+                                            <div class="row">
+                                                <p class="card-text col-3 row "></p>
+                                                <p class="col-6 row">@Model.pincode,@Model.district</p>
+                                            </div>
+                                            <div class="row">
+                                                <p class="card-text col-3 row "></p>
+                                                <p class="col-6 row">@Model.state ,@Model.country</p>
+                                            </div>
+                                           
+                                            <div class="row">
+                                                <p class="card-text col-3 row "><b>Email</b></p>
+                                                <p class="col-6 row"> @Model.email</p>
+                                            </div>
+                                            <div class="row">
+                                                <p class="card-text col-3 row "><b>Phone</b></p>
+                                                <p class="col-6 row">@Model.phoneNumber</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                        </div>
+
+
+                        <div class=" text-center">
+                            <div class="form-group">
+                                <a href="/admin/ContactEdit" class="btn btn-orange" style=" background-color: #3187e3;">Edit</a>
+                                <a class="btn btn-indigo" asp-controller="Admin" asp-action="Index" style="text-decoration:none;"><b style="color: white;">Back</b></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            </div>
+        </div>
+    </div>
+
+        @*<style>
+
+            .container {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 30px;
+            }
+
+            .flex-fill {
+                margin-left: -86px;
+            }
+
+            .btn-indigo {
+                background: #e52d2e;
+                color: white;
+            }
+
+            .btn-orange {
+                background-color: #3187e3;
+                color: white;
+                margin-left: -10%;
+            }
+
+            .container-fluid {
+                width: 100%;
+                padding-right: 63px;
+                padding-left: 96px;
+                margin-right: auto;
+                margin-left: -86px;
+            }
+            .form-group {
+                margin-left: 80%;
+            }
+            .col-8 {
+                padding-top: 4%;
+                margin-left: 21%;
+            }
+        </style>*@
+
+
+

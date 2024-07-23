@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    ViewData["Title"] = "Mobizone(Admin) - Dashboard";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+    int usersCount = ViewBag.UsersCount;
+    int productCount = ViewBag.ProductCount;
+}
+<div class="row" style=" margin: 10%;padding-left: 0px;">
+    <a style="text-decoration: none;color: black;" class="card col-5 shadow p-3 mb-5 bg-white rounded" asp-action="Userdata">
+            <div class="card-title" style="font-size: 29px;">Customers</div>
+            <div class="card-body">
+                <p style="font-weight: bold;font-size: 80px;">@usersCount</p>
+            </div>
+    </a>
+
+    <div class="col-1"></div>
+    <a style="text-decoration: none;color: black;" class="card col-5 shadow p-3 mb-5 bg-white rounded" asp-action="List">
+            <div class="card-title" style="font-size: 29px;">Products</div>
+            <div class="card-body">
+                <p style="font-weight: bold;font-size: 80px;">@productCount</p>
+            </div>
+    </a>
+</div>
+
+<style>
+   
+</style>
